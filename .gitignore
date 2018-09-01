@@ -5,3 +5,7 @@
 *.json
 *.pickle
 docs/build
+build/
+dist/
+time_cache.egg-info/
+
