@@ -15,8 +15,8 @@ def get_long_description():
 
 
 setup(
-    name='time cache',
-    version='0.0.2',
+    name='timecache',
+    version='0.0.3',
     description='Time Cache',
     long_description=get_long_description(),
     url='https://github.com',
