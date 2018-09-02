@@ -7,5 +7,5 @@
 docs/build
 build/
 dist/
-time_cache.egg-info/
+timecache.egg-info/
 

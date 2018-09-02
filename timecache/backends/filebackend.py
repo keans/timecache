@@ -42,4 +42,3 @@ class FileBackend(BaseBackend):
         return "<{}(filename='{}')>".format(
             self.__class__.__name__, self.filename,
         )
-

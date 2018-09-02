@@ -79,7 +79,7 @@ class Cache:
         set item by key via [] operator
         """
         with self.__lock:
-            cache_entry = CacheEntry(item, DEFAULT_DURATION)
+            cache_entry = CacheEntry(item, self._default_duration)
             log.debug("__setitem__: {}".format(cache_entry))
             self._d[key] = cache_entry
 
@@ -157,11 +157,14 @@ class Cache:
         """
         return self[key]
 
-    def set(self, key, item, duration=DEFAULT_DURATION):
+    def set(self, key, item, duration=None):
         """
         set an item to the given key and set duration
         """
-        assert isinstance(duration, datetime.timedelta)
+        duration = duration or self._default_duration
+        assert isinstance(
+            duration, datetime.timedelta
+        )
 
         with self.__lock:
             self._d[key] = CacheEntry(item, duration)
@@ -177,12 +180,12 @@ class Cache:
         load cached data via the backend
         """
         with self.__lock:
-            log.debug("load: {}".format(self.backend.filename))
             self._d.update(self.backend.load())
+            log.debug("load: {}".format(self.backend.filename))
 
     def save(self):
         """
         save cached data via the backend
         """
-        log.debug("save: {}".format(self.backend.filename))
         self.backend.save(list(self._d.items()))
+        log.debug("save: {}".format(self.backend.filename))
